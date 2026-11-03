@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Персоналии & Команда | Реестр специалистов</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              200: '#bfdbfe',
+              300: '#93c5fd',
+              400: '#60a5fa',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#1e3a8a',
+              950: '#172554',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f8fafc;
+    }
+    .page-transition {
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    .card-hover-effect {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .card-hover-effect:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 30px -10px rgba(37, 99, 235, 0.15);
+    }
+    /* Плавный скролл */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Анимация бесконечной бегущей ленты справа налево (Instagram Marquee) */
+    @keyframes marqueeScroll {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marqueeScroll 45s linear infinite;
+    }
+    /* Непрерывный ход без паузы при наведении */
+
+    /* Стили для интерактивных кружков "Наши герои" */
+    .hero-circle {
+      transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .hero-info-card {
+      transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+  </style>
+</head>
+<body class="text-slate-800 bg-gradient-to-br from-blue-100/70 via-sky-50/50 to-indigo-100/60 min-h-screen flex flex-col relative overflow-x-hidden selection:bg-brand-500 selection:text-white">
+
+  <!-- Декоративные мягкие градиентные свечения на фоне сайта -->
+  <div class="pointer-events-none fixed -top-32 -left-28 w-96 h-96 bg-cyan-400/20 rounded-full blur-3xl z-0"></div>
+  <div class="pointer-events-none fixed top-1/3 -right-28 w-[30rem] h-[30rem] bg-blue-500/15 rounded-full blur-3xl z-0"></div>
+  <div class="pointer-events-none fixed -bottom-24 left-1/3 w-96 h-96 bg-indigo-500/20 rounded-full blur-3xl z-0"></div>
+
+  <!-- ==================== ШАПКА САЙТА: СПб ГБПОУ «Ижорский политехнический колледж» ==================== -->
+  <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-xl border-b border-blue-200/80 shadow-md shadow-blue-500/5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 sm:py-4 relative z-10">
+      <div class="flex items-center justify-between gap-4">
+        
+        <!-- Логотип + Название колледжа -->
+        <div class="flex items-center gap-3.5 sm:gap-4 cursor-pointer group" onclick="navigateTo('home')">
+          <!-- Логотип колледжа (изображение) -->
+          <div class="relative shrink-0 w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden p-0.5 bg-gradient-to-tr from-cyan-400 via-brand-600 to-indigo-600 shadow-lg shadow-blue-500/20 group-hover:scale-105 group-hover:shadow-brand-500/35 transition-all duration-300">
+            <div class="w-full h-full rounded-full overflow-hidden bg-white flex items-center justify-center">
+              <img src="FM47-92391RPsGFGJ0Q6iXhM8vKtvYCeRgAcvimmarKSHnok142flsAhi__gPXLhqSA1YntJZlh2sDBjHsFRiepJ.jpg" 
+                   alt="Логотип СПб ГБПОУ Ижорский политехнический колледж" 
+                   onerror="this.onerror=null; this.src='https://placehold.co/200x200/003580/ffffff?text=ИПК';"
+                   class="w-full h-full object-contain">
+            </div>
+          </div>
+
+          <!-- Название учреждения -->
+          <div>
+            <span class="px-2.5 py-0.5 rounded-full text-[11px] font-black uppercase bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-sm shadow-blue-500/20 tracking-wider">
+              СПб ГБПОУ
+            </span>
+            <h1 class="text-base sm:text-xl lg:text-2xl font-black bg-gradient-to-r from-slate-900 via-brand-900 to-blue-700 bg-clip-text text-transparent group-hover:from-brand-600 group-hover:to-indigo-600 transition-all duration-300 leading-tight mt-1 tracking-tight">
+              «Ижорский политехнический колледж»
+            </h1>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </header>
+  <!-- ==================== КОНЕЦ ШАПКИ САЙТА ==================== -->
+
+  <!-- ОСНОВНОЙ КОНТЕНТ (SPA) -->
+  <main class="flex-grow max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 relative z-10">
+    
+    <!-- СТРАНИЦА 1: ГЛАВНАЯ (6 Разделов друг под другом) -->
+    <section id="view-home" class="page-transition">
+      <!-- 1. Блок заголовка: Герои, но не Marvel -->
+      <div class="max-w-4xl mx-auto mb-8 sm:mb-10 flex flex-col items-center">
+        
+        <!-- Верхний бейдж -->
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-blue-500/15 via-indigo-500/15 to-cyan-500/15 text-brand-700 text-xs font-bold mb-4 sm:mb-5 border border-blue-200/80 shadow-sm backdrop-blur-md">
+          <i class="fa-solid fa-heart text-rose-500 animate-pulse"></i> 
+          <span class="bg-gradient-to-r from-brand-700 to-indigo-700 bg-clip-text text-transparent">Преподаватели и мастера</span>
+        </div>
+
+        <!-- Скругленный прямоугольник для заголовка -->
+        <div class="w-full bg-white/85 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-blue-200 shadow-xl shadow-blue-500/10 px-6 py-6 sm:px-10 sm:py-9 text-center relative overflow-hidden group">
+          <div class="absolute inset-0 bg-gradient-to-r from-cyan-400/10 via-blue-500/10 to-indigo-500/10 opacity-70 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+          <h1 class="relative z-10 text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight bg-gradient-to-r from-blue-900 via-brand-600 to-indigo-700 bg-clip-text text-transparent drop-shadow-sm">
+            Герои, но не Marvel
+          </h1>
+        </div>
+      </div>
+
+      <!-- 2. РАЗДЕЛ: БЕГУЩАЯ ЛЕНТА В СТИЛЕ КАРТОЧЕК INSTAGRAM (Сразу после названия) -->
+      <div class="mb-12 sm:mb-14">
+        <div class="flex items-center justify-between mb-4 px-2">
+          <div class="flex items-center gap-2.5">
+            <span class="w-3.5 h-3.5 rounded-full bg-gradient-to-tr from-amber-400 via-rose-500 to-indigo-600 shadow-md shadow-rose-500/30"></span>
+            <h2 class="text-lg sm:text-xl font-extrabold text-slate-900 tracking-tight">
+              Живые моменты и лица колледжа
+            </h2>
+          </div>
+          <span class="text-xs font-bold text-white bg-gradient-to-r from-brand-600 to-indigo-600 shadow-md shadow-brand-500/20 px-3.5 py-1.5 rounded-full hidden sm:inline-flex items-center gap-1.5">
+            <i class="fa-brands fa-instagram text-sm"></i> Фотолента
+          </span>
+        </div>
+
+        <!-- Контейнер с затуханием по краям -->
+        <div class="relative w-full overflow-hidden marquee-wrapper py-3">
+          <!-- Градиентные маски по краям для мягкого затухания -->
+          <div class="pointer-events-none absolute left-0 top-0 bottom-0 w-12 sm:w-24 bg-gradient-to-r from-blue-100/90 via-sky-50/70 to-transparent z-10"></div>
+          <div class="pointer-events-none absolute right-0 top-0 bottom-0 w-12 sm:w-24 bg-gradient-to-l from-indigo-100/90 via-sky-50/70 to-transparent z-10"></div>
+
+          <!-- Бегущая дорожка карточек -->
+          <div class="marquee-track gap-5 sm:gap-6 flex items-center" id="instagram-track">
+            <!-- Карточки генерируются скриптом (2 набора для бесшовности) -->
+          </div>
+        </div>
+        <p class="text-center text-xs text-slate-500 mt-2 font-medium">
+          <i class="fa-regular fa-hand-pointer text-brand-600 mr-1"></i> Непрерывная лента колледжа • Кликните на сердечко, чтобы поддержать
+        </p>
+      </div>
+
+      <!-- 3. Вопрос и поясняющий текст -->
+      <div class="max-w-4xl mx-auto mb-14 sm:mb-16 flex flex-col items-center">
+        <!-- Скругленный прямоугольник с вопросом -->
+        <div class="w-full bg-white/90 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-blue-200/90 shadow-xl shadow-blue-500/10 px-6 py-6 sm:px-8 sm:py-7 text-center mb-5 sm:mb-6 relative overflow-hidden">
+          <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-cyan-400 via-blue-600 to-indigo-600"></div>
+          <div class="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-tr from-brand-600 to-indigo-600 text-white text-lg mb-3 shadow-lg shadow-brand-500/30">
+            <i class="fa-solid fa-question"></i>
+          </div>
+          <h2 class="text-xl sm:text-2xl md:text-3xl font-extrabold bg-gradient-to-r from-slate-900 via-brand-900 to-blue-800 bg-clip-text text-transparent tracking-tight leading-snug">
+            Почему мы считаем преподавателей героями?
+          </h2>
+        </div>
+
+        <!-- Скругленный прямоугольник для текста с мягким градиентом и отступами -->
+        <div class="w-full bg-gradient-to-br from-white/95 via-blue-50/80 to-indigo-50/70 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-blue-200/90 shadow-xl shadow-blue-500/10 p-6 sm:p-9 text-slate-700 leading-relaxed text-sm sm:text-base md:text-lg text-justify sm:text-center relative">
+          Мы уверены: герои не обязаны носить плащи и спасать мир — они просто каждый день заходят в аудиторию. Для нас «герой рядом» — это наставник, который сам прошёл огонь, воду и реальное производство, а теперь щедро делится этим опытом, не прячась за скучными параграфами учебников. Это человек с титаническим терпением, готовый в десятый раз объяснить сложную тему простыми словами, вовремя подставить плечо и поверить в студента даже тогда, когда у того опускаются руки. Рядом с такими преподавателями не страшно пробовать и ошибаться, ведь за строгим взглядом всегда чувствуется надёжная опора — живая, настоящая и проверенная делом.
+        </div>
+      </div>
+
+      <!-- 4. РАЗДЕЛ: НАШИ ГЕРОИ (5 ИНТЕРАКТИВНЫХ РАЗЪЕЗЖАЮЩИХСЯ КРУЖКОВ) -->
+      <div class="mb-14 sm:mb-20">
+        <div class="text-center mb-8">
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xs font-bold mb-3 shadow-md shadow-blue-500/25">
+            <i class="fa-solid fa-graduation-cap"></i> Наставники колледжа
+          </div>
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-black bg-gradient-to-r from-slate-900 via-brand-800 to-indigo-800 bg-clip-text text-transparent tracking-tight">
+            Наши герои
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-600 mt-2 max-w-lg mx-auto font-medium">
+            Наведите курсор или нажмите на аватар наставника — остальные разойдутся в стороны, открывая историю героя
+          </p>
+        </div>
+
+        <!-- Контейнер для 5 кружков -->
+        <div class="relative max-w-4xl mx-auto px-4">
+          <div id="heroes-circles-wrap" class="flex items-center justify-center gap-3 sm:gap-6 py-6 overflow-x-visible relative min-h-[140px] sm:min-h-[170px]">
+            <!-- 5 кружков генерируются скриптом -->
+          </div>
+
+          <!-- Выпадающий информационный блок преподавателя -->
+          <div id="hero-drop-card" class="hero-info-card opacity-0 translate-y-6 pointer-events-none transition-all duration-500 max-w-2xl mx-auto bg-white/95 backdrop-blur-xl rounded-3xl border-2 border-brand-300 shadow-2xl shadow-brand-500/20 p-6 sm:p-8 mt-2 relative overflow-hidden">
+            <div class="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-cyan-400 via-brand-500 to-indigo-600"></div>
+            
+            <div class="flex flex-col sm:flex-row items-center sm:items-start gap-5">
+              <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden p-0.5 bg-gradient-to-tr from-cyan-400 via-brand-600 to-indigo-600 shadow-lg shadow-brand-500/30 shrink-0">
+                <div class="w-full h-full rounded-[14px] overflow-hidden bg-white">
+                  <img id="drop-avatar" src="" alt="Герой" class="w-full h-full object-cover">
+                </div>
+              </div>
+
+              <div class="flex-grow text-center sm:text-left">
+                <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2 mb-2">
+                  <span id="drop-role" class="px-3 py-1 rounded-full bg-gradient-to-r from-blue-50 to-indigo-50 text-brand-700 text-xs font-extrabold border border-blue-200 shadow-sm">
+                    Должность
+                  </span>
+                </div>
+
+                <h3 id="drop-name" class="text-xl sm:text-2xl font-black text-slate-900 mb-2 tracking-tight">
+                  ФИО преподавателя
+                </h3>
+
+                <p id="drop-desc" class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4 italic">
+                  Описание...
+                </p>
+
+                <div class="flex items-center justify-center sm:justify-start gap-3">
+                  <button id="drop-view-btn" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-brand-600 via-blue-600 to-indigo-600 hover:from-brand-700 hover:to-indigo-700 text-white font-bold text-xs sm:text-sm shadow-lg shadow-brand-500/30 hover:shadow-brand-500/45 transition-all duration-300 active:scale-95">
+                    <span>Подробная биография</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. ЗАКЛЮЧИТЕЛЬНЫЙ БЛОК: О НАСТОЯЩИХ ГЕРОЯХ КОЛЛЕДЖА -->
+      <div class="max-w-4xl mx-auto mt-6 mb-12 sm:mb-16">
+        <div class="relative w-full bg-gradient-to-br from-white/95 via-blue-50/90 to-indigo-100/60 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-blue-200/90 shadow-xl shadow-blue-500/10 p-6 sm:p-10 text-center overflow-hidden">
+          <div class="absolute -top-12 -right-12 w-36 h-36 bg-cyan-400/20 rounded-full blur-2xl pointer-events-none"></div>
+          <div class="inline-flex items-center justify-center w-11 h-11 rounded-2xl bg-gradient-to-tr from-brand-500 to-indigo-600 text-white text-base mb-3.5 shadow-md shadow-brand-500/30">
+            <i class="fa-solid fa-feather-pointed"></i>
+          </div>
+          <p class="relative z-10 text-slate-700 text-sm sm:text-base md:text-lg leading-relaxed font-semibold max-w-2xl mx-auto text-balance">
+            «Наши герои не летают. Они ходят по коридорам колледжа, носят указку и иногда — флешку с лекциями. Они не сражаются со злодеями. Они сражаются с нашим непониманием, дедлайнами и страхом ошибиться. И, что важнее, почти всегда побеждают.»
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- СТРАНИЦА 2: ДЕТАЛЬНЫЙ ПРОСМОТР ЧЕЛОВЕКА -->
+    <section id="view-detail" class="page-transition hidden">
+      <!-- Кнопка возврата -->
+      <div class="mb-6">
+        <button onclick="navigateTo('home')" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/90 backdrop-blur-md text-slate-700 hover:text-brand-700 font-bold shadow-md shadow-blue-500/5 hover:shadow-lg hover:shadow-brand-500/15 border border-blue-100 hover:border-brand-300 transition-all group">
+          <i class="fa-solid fa-arrow-left group-hover:-translate-x-1 transition-transform text-brand-600"></i>
+          Назад к героям
+        </button>
+      </div>
+
+      <!-- Детальная карточка -->
+      <div id="detail-content" class="bg-white/95 backdrop-blur-xl rounded-3xl border border-blue-200 shadow-2xl shadow-blue-500/15 overflow-hidden">
+        <!-- Динамическое наполнение деталями -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Футер сайта -->
+  <footer class="mt-auto border-t border-blue-200/80 bg-white/85 backdrop-blur-md py-6 text-center text-xs text-slate-500 relative z-10">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-2 font-bold text-slate-700">
+        <span class="w-2.5 h-2.5 rounded-full bg-gradient-to-r from-cyan-400 to-brand-600 shadow-sm shadow-brand-500/40"></span>
+        СПб ГБПОУ «Ижорский политехнический колледж»
+      </div>
+      <div class="font-medium text-slate-500">
+        Проект «Герои, но не Marvel» • 1921–2026
+      </div>
+    </div>
+  </footer>
+
+  <!-- Скрипты приложения -->
+  <script>
+    // Массив фото для Instagram-карточек
+    const instagramFeed = [
+      {
+        id: "ig-1",
+        image: "8CA1B31F-290A-404B-8BD7-A6A28D85F62C.JPG",
+        caption: "Театральная студия и живые репетиции — наши творческие будни ✨🎭",
+        author: "izhorskij colledg",
+        likes: 142,
+        time: "Вчера"
+      },
+      {
+        id: "ig-2",
+        image: "IMG_3417.JPG",
+        caption: "Наставник и ученик: доверительный диалог вне учебных классов 🤝",
+        author: "izhorskij colledg",
+        likes: 218,
+        time: "2 дня назад"
+      },
+      {
+        id: "ig-3",
+        image: "IMG_5017.JPG",
+        caption: "Энергия, опыт и вдохновение каждого дня в колледже 📸",
+        author: "izhorskij colledg",
+        likes: 305,
+        time: "3 дня назад"
+      },
+      {
+        id: "ig-4",
+        image: "IMG_5415.jpg",
+        caption: "Форум «ПРОФПРОФТЕХ»: делимся практическим опытом со сцены 🎙️",
+        author: "izhorskij colledg",
+        likes: 421,
+        time: "5 дней назад"
+      },
+      {
+        id: "ig-5",
+        image: "photo_2026-10-26_12-04-58.jpg",
+        caption: "Вечерние размышления после продуктивного учебного дня 🌅",
+        author: "izhorskij colledg",
+        likes: 189,
+        time: "Неделю назад"
+      },
+      {
+        id: "ig-6",
+        image: "photo_2026-10-26_12-06-12.jpg",
+        caption: "Весенний Санкт-Петербург и наши прогулки у воды 🌿",
+        author: "izhorskij colledg",
+        likes: 267,
+        time: "12 октября"
+      },
+      {
+        id: "ig-7",
+        image: "photo_2026-10-26_12-45-24.jpg",
+        caption: "Характер и внутренняя сила наших мастеров своего дела 🌳",
+        author: "izhorskij colledg",
+        likes: 312,
+        time: "26 октября"
+      },
+      {
+        id: "ig-8",
+        image: "photo_2026-10-26_12-45-25.jpg",
+        caption: "Взгляд вперёд: новые идеи и уверенность в правильном выборе 💡",
+        author: "izhorskij colledg",
+        likes: 245,
+        time: "26 октября"
+      },
+      {
+        id: "ig-9",
+        image: "photo_2026-10-26_12-45-26.jpg",
+        caption: "Опора рядом. Тот, кто всегда готов протянуть руку помощи 🤝",
+        author: "izhorskij colledg",
+        likes: 389,
+        time: "26 октября"
+      }
+    ];
+
+    // Рендер Instagram-ленты (двойной набор для бесконечного цикла)
+    function renderInstagramFeed() {
+      const track = document.getElementById('instagram-track');
+      if (!track) return;
+      track.innerHTML = '';
+
+      // Создаем дублированный список для непрерывной анимации (marquee)
+      const doubleList = [...instagramFeed, ...instagramFeed];
+
+      doubleList.forEach((post, idx) => {
+        const uniqueId = `post-${idx}`;
+        const card = document.createElement('div');
+        card.className = "w-72 sm:w-80 shrink-0 bg-white/95 backdrop-blur-md rounded-2xl border border-blue-200/90 shadow-md hover:shadow-2xl hover:border-brand-300 transition-all duration-300 overflow-hidden flex flex-col group select-none";
+        
+        card.innerHTML = `
+          <!-- Верхняя плашка поста -->
+          <div class="px-4 py-3 flex items-center justify-between border-b border-blue-50">
+            <div class="flex items-center gap-2.5">
+              <div class="w-8 h-8 rounded-full p-0.5 bg-gradient-to-tr from-amber-400 via-rose-500 to-indigo-600 shadow-sm">
+                <div class="w-full h-full rounded-full bg-white p-0.5 flex items-center justify-center overflow-hidden">
+                  <img src="FM47-92391RPsGFGJ0Q6iXhM8vKtvYCeRgAcvimmarKSHnok142flsAhi__gPXLhqSA1YntJZlh2sDBjHsFRiepJ.jpg" 
+                       onerror="this.src='https://placehold.co/100x100/1e40af/ffffff?text=ИПК'" 
+                       class="w-full h-full object-cover">
+                </div>
+              </div>
+              <div>
+                <div class="flex items-center gap-1 leading-tight">
+                  <span class="text-xs font-bold text-slate-800">${post.author}</span>
+                  <i class="fa-solid fa-circle-check text-blue-500 text-[10px]"></i>
+                </div>
+                <span class="text-[10px] text-slate-400 leading-none">Ижорский колледж • Колпино</span>
+              </div>
+            </div>
+            <button class="text-slate-400 hover:text-slate-600 text-xs px-1">
+              <i class="fa-solid fa-ellipsis"></i>
+            </button>
+          </div>
+
+          <!-- Фотография Instagram-поста (пропорция 4:5) -->
+          <div class="relative w-full aspect-[4/5] bg-slate-900 overflow-hidden cursor-pointer" onclick="toggleLike('${uniqueId}')">
+            <img src="${post.image}" 
+                 alt="${post.caption}" 
+                 onerror="this.src='https://placehold.co/600x750/1e40af/ffffff?text=Фото'" 
+                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <!-- Всплывающее сердечко при двойном клике -->
+            <div id="heart-anim-${uniqueId}" class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 scale-50 transition-all duration-300">
+              <i class="fa-solid fa-heart text-white/90 text-6xl drop-shadow-lg"></i>
+            </div>
+          </div>
+
+          <!-- Нижняя панель действий (Like, Comment, Share, Bookmark) -->
+          <div class="p-4 flex flex-col gap-2">
+            <div class="flex items-center justify-between text-slate-700">
+              <div class="flex items-center gap-4 text-base">
+                <button onclick="toggleLike('${uniqueId}')" class="transition transform active:scale-125 focus:outline-none" id="like-btn-${uniqueId}">
+                  <i class="fa-regular fa-heart hover:text-rose-500 transition" id="like-icon-${uniqueId}"></i>
+                </button>
+                <button class="hover:text-blue-600 transition"><i class="fa-regular fa-comment"></i></button>
+                <button class="hover:text-blue-600 transition"><i class="fa-regular fa-paper-plane"></i></button>
+              </div>
+              <button class="text-slate-400 hover:text-slate-700 transition">
+                <i class="fa-regular fa-bookmark"></i>
+              </button>
+            </div>
+
+            <!-- Счетчик отметок "Нравится" -->
+            <div class="text-xs font-bold text-slate-900" id="likes-count-${uniqueId}">
+              ${post.likes} отметок «Нравится»
+            </div>
+
+            <!-- Подпись к фото -->
+            <div class="text-xs text-slate-700 line-clamp-2">
+              <span class="font-bold text-slate-900 mr-1.5">${post.author}</span>
+              ${post.caption}
+            </div>
+
+            <div class="text-[10px] text-slate-400 uppercase tracking-wide mt-0.5">
+              ${post.time}
+            </div>
+          </div>
+        `;
+        track.appendChild(card);
+      });
+    }
+
+    // Обработка лайка Instagram-карточки
+    const likedPosts = {};
+    function toggleLike(id) {
+      const btnIcon = document.getElementById(`like-icon-${id}`);
+      const countEl = document.getElementById(`likes-count-${id}`);
+      const heartAnim = document.getElementById(`heart-anim-${id}`);
+      if (!btnIcon || !countEl) return;
+
+      const isLiked = likedPosts[id];
+      let currentCount = parseInt(countEl.innerText) || 100;
+
+      if (!isLiked) {
+        likedPosts[id] = true;
+        btnIcon.className = "fa-solid fa-heart text-rose-500";
+        countEl.innerText = `${currentCount + 1} отметок «Нравится»`;
+        
+        // Всплывающее сердечко
+        if (heartAnim) {
+          heartAnim.classList.remove('opacity-0', 'scale-50');
+          heartAnim.classList.add('opacity-100', 'scale-100');
+          setTimeout(() => {
+            heartAnim.classList.remove('opacity-100', 'scale-100');
+            heartAnim.classList.add('opacity-0', 'scale-50');
+          }, 600);
+        }
+      } else {
+        likedPosts[id] = false;
+        btnIcon.className = "fa-regular fa-heart hover:text-rose-500 transition";
+        countEl.innerText = `${Math.max(0, currentCount - 1)} отметок «Нравится»`;
+      }
+    }
+
+    // Данные 5 преподавателей («Наши герои»)
+    const initialProfiles = [
+      {
+        id: 1,
+        fullName: "Парфенов Иван Дмитриевич",
+        role: "Преподаватель специальных дисциплин",
+        shortDesc: "- я устал, босс...",
+        fullBio: "Колпино, школа № 476, политехнический колледж, космические войска, завод и, наконец, Ижорский колледж — перечислять можно как случайный набор точек на карте, но для него это чётко выверенный маршрут. Родился 4 мая 1996 года, успел пройти армейскую закалку и производство, пока в 2019 году окончательно не связал свой путь с аудиториями Ижорского колледжа. Он из тех редких людей, кто не говорит громких слов, а просто изо дня в день подставляет надёжное плечо студентам, вдохновляет личным примером и доказывает: настоящая опора и характер формируются именно на таких жизненных виражах.",
+        avatar: "п3.jpg"
+      },
+      {
+        id: 2,
+        fullName: "Махов Александр Алексеевич",
+        role: "Преподаватель специальных дисциплин",
+        shortDesc: "- только саморазвитие...",
+        fullBio: "Александр Алексеевич работает в колледже более 8 лет. Специализируется на современных технологиях металлообработки и станочном оборудовании. Умеет с первых минут вовлечь ребят в самостоятельное техническое творчество и поддержать в трудную минуту.",
+        avatar: "photo_2026-08-23_17-40-43.jpg"
+      },
+      {
+        id: 3,
+        fullName: "Гайдамакина Анна Ростиславовна",
+        role: "Преподаватель специальных дисциплин",
+        shortDesc: "- езжай к морю и отдай волнам свою печаль...",
+        fullBio: "Родилась 1 июля 2005 года — и астрологи сразу вышли из чата: характер оказался настолько бронебойным и упрямым, что звёзды предпочли не спорить. Преподавать мечтала ещё после 9 класса, но у вселенной было отличное чувство юмора — поэтому сначала пришлось подружиться с микросхемами. Итог: диплом Малоохтинского колледжа по мехатронике и мобильной робототехнике (2024 год) и полтора года суровых заводских будней в статусе инженера. Пока другие просто читали инструкции, она приручала механизмы на реальном производстве. Впрочем, от судьбы не уйдёшь, особенно если ты привык продавливать стены лбом: сделав технический крюк, она всё-таки пришла преподавать в Ижорский колледж. Студентам крупно повезло — когда рядом наставник, который разбирается в людях так же дотошно, как в датчиках и сервоприводах, расслабиться не получится.",
+        avatar: "photo_2026-03-21_23-13-13.jpg"
+      },
+      {
+        id: 4,
+        fullName: "Рыжкова Марина Александровна",
+        role: "Заведующая по учебно-воспитательной работе",
+        shortDesc: "-  все что нас не убивает, делает нас сильней...",
+        fullBio: "Родилась и выросла в Колпино, прошла классическую школу закалки: самоуправление в школе № 404, красный пионерский галстук и больше десяти лет художественной гимнастики. В комсомол не попала только потому, что СССР закончился чуть раньше, а со спортом пришлось проститься из-за здоровья — зато характер гимнастки остался навсегда. Получив сразу два образования (педагогическое и психологическое), дала железный зарок: «Учителем точно не буду!». Спойлер: никогда не спорьте с педагогикой.\n\nЖизнь сделала красивый вираж через школы и социальную сферу, чтобы в 2015 году привести её в колледж. От рядового педагога-психолога до создателя мощной службы сопровождения и кресла заместителя директора по УВР в 2026 году — путь мощный. Студенты знают: за строгой должностью скрывается человек, который искренне горит идеей помощи и видит каждого насквозь. А на «гражданке» этот супергерой без плаща воспитывает двоих детей, в редкие свободные минуты спасается хорошим фэнтези с корейскими дорамами и всё ещё надеется выкроить в расписании пару часов на тренировки.",
+        avatar: "H6yz1CYjMqpY17dhJKmrOoy0T-kDFZc8PrskHdcPhRn-zXYfQM0qJys7PbxbRxQnBJOjwtGBN6YqfYciyyFiJ9SJ.jpg"
+      },
+      {
+        id: 5,
+        fullName: "Шатилина Наталья Сергеевна",
+        role: "Директор СПб ГБПОУ «Ижорский политехнический колледж»",
+        shortDesc: "- все взрослые сначала были детьми, только мало кто из них об этом помнит...",
+        fullBio: "Шестнадцать лет, палаточный лагерь активистов и первое твёрдое решение: «Моё место — с людьми». Путь от вожатой до директора колледжа получился не просто карьерой, а настоящей школой управления человеческим потенциалом. Сначала — диплом с отличием в сложнейшей дефектологии, потом руководство детским техническим творчеством, методика областного масштаба и неожиданный, но мощный вираж: литейное производство промышленных гигантов «ОМЗ». Оказалось, законы раскрытия талантов одинаково работают у школьной доски и у металлургической печи.\n\nОна из тех руководителей новой формации, кто не закрывается в кабинете за ворохом бумаг. Для неё колледж — это не только профессия, это место, где в тебя верят, учат не бояться ошибок и помогают найти свой компас в жизни. Тонко чувствовать людей помогает и главное увлечение — сцена Большого семейного театра, где она не просто зритель, а актриса. Сильный стратег с театральной чуткостью к деталям: пока такие люди стоят у руля, за будущее студентов можно быть спокойным.",
+        avatar: "4.jpg"
+      }
+    ];
+
+    // Хранилище данных с сохранением в localStorage
+    const STORAGE_KEY = 'ipk_heroes_profiles_clean_v12';
+    let profiles = [];
+
+    function loadData() {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        try {
+          profiles = JSON.parse(saved);
+        } catch (e) {
+          profiles = JSON.parse(JSON.stringify(initialProfiles));
+        }
+      } else {
+        profiles = JSON.parse(JSON.stringify(initialProfiles));
+      }
+    }
+
+    function saveData() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(profiles));
+    }
+
+    function resetDefaults() {
+      if (confirmReset()) {
+        profiles = JSON.parse(JSON.stringify(initialProfiles));
+        saveData();
+        renderHeroesCircles();
+        if (currentView === 'detail' && selectedPersonId) {
+          showPersonDetail(selectedPersonId);
+        }
+      }
+    }
+
+    // Пользовательское подтверждение
+    function confirmReset() {
+      return window.confirm ? window.confirm("Сбросить все карточки к начальным данным?") : true;
+    }
+
+    // Состояние SPA
+    let currentView = 'home';
+    let selectedPersonId = null;
+
+    // Переключение SPA страниц
+    function navigateTo(view) {
+      currentView = view;
+      const homeView = document.getElementById('view-home');
+      const detailView = document.getElementById('view-detail');
+
+      if (view === 'home') {
+        detailView.classList.add('hidden');
+        homeView.classList.remove('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        homeView.classList.add('hidden');
+        detailView.classList.remove('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    // Открытие детального просмотра
+    function showPersonDetail(id) {
+      selectedPersonId = id;
+      const person = profiles.find(p => p.id === id);
+      if (!person) return;
+
+      const container = document.getElementById('detail-content');
+
+      // Массив всех фотографий сайта для создания коллажа
+      const collageImages = [
+        "8CA1B31F-290A-404B-8BD7-A6A28D85F62C.JPG",
+        "IMG_3417.JPG",
+        "IMG_5017.JPG",
+        "IMG_5415.jpg",
+        "photo_2026-10-26_12-04-58.jpg",
+        "photo_2026-10-26_12-06-12.jpg",
+        "photo_2026-10-26_12-45-24.jpg",
+        "photo_2026-10-26_12-45-25.jpg",
+        "photo_2026-10-26_12-45-26.jpg",
+        "п3.jpg",
+        "photo_2026-08-23_17-40-43.jpg",
+        "photo_2026-03-21_23-13-13.jpg",
+        "H6yz1CYjMqpY17dhJKmrOoy0T-kDFZc8PrskHdcPhRn-zXYfQM0qJys7PbxbRxQnBJOjwtGBN6YqfYciyyFiJ9SJ.jpg",
+        "4.jpg"
+      ];
+
+      const collageItemsHtml = collageImages.map(imgSrc => `
+        <div class="relative overflow-hidden bg-slate-900 group/item">
+          <img src="${imgSrc}" alt="Момент колледжа" 
+               onerror="this.src='https://placehold.co/300x200/1e40af/ffffff?text=ИПК'" 
+               class="w-full h-full object-cover opacity-75 group-hover/item:opacity-100 group-hover/item:scale-110 transition duration-500">
+        </div>
+      `).join('');
+
+      container.innerHTML = `
+        <!-- Верхний баннер: Коллаж из всех фотографий сайта -->
+        <div class="h-52 sm:h-64 relative overflow-hidden bg-slate-950">
+          <!-- Сетка коллажа из фотографий -->
+          <div class="absolute inset-0 grid grid-cols-4 sm:grid-cols-7 grid-rows-2 gap-1 scale-105 pointer-events-none">
+            ${collageItemsHtml}
+          </div>
+
+          <!-- Мягкий сине-индиго градиент поверх коллажа для контрастности и стилистики -->
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-blue-950/60 to-brand-900/40 backdrop-blur-[1px]"></div>
+          
+          <!-- Текстовая плашка поверх коллажа -->
+          <div class="relative z-10 p-6 flex justify-between items-start">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/70 backdrop-blur-md border border-white/20 text-white text-xs font-bold tracking-wider uppercase shadow-lg">
+              <i class="fa-solid fa-address-card text-cyan-400"></i> Личный профиль наставника
+            </div>
+          </div>
+        </div>
+
+        <!-- Основная карточка с наездом на баннер -->
+        <div class="px-6 sm:px-10 pb-10">
+          <div class="flex flex-col sm:flex-row items-center sm:items-end gap-6 -mt-20 sm:-mt-24 mb-6 text-center sm:text-left">
+            <div class="w-36 h-36 sm:w-44 sm:h-44 rounded-3xl overflow-hidden p-1 bg-gradient-to-tr from-cyan-400 via-brand-500 to-indigo-600 shadow-2xl shadow-brand-500/30 bg-white shrink-0 relative">
+              <div class="w-full h-full rounded-[22px] overflow-hidden bg-slate-100">
+                <img src="${person.avatar}" alt="${person.fullName}" 
+                     onerror="this.src='https://placehold.co/400x400/1e40af/ffffff?text=Фото'" 
+                     class="w-full h-full object-cover">
+              </div>
+            </div>
+            <div class="flex-grow pt-2">
+              <h1 class="text-2xl sm:text-4xl font-black bg-gradient-to-r from-slate-900 via-brand-900 to-indigo-900 bg-clip-text text-transparent tracking-tight">
+                ${person.fullName}
+              </h1>
+              <p class="text-brand-700 font-medium text-xs sm:text-sm mt-1 italic">
+                ${person.shortDesc}
+              </p>
+            </div>
+          </div>
+
+          <!-- Биография на всю ширину -->
+          <div class="w-full bg-gradient-to-br from-blue-50/70 via-white to-indigo-50/50 rounded-2xl p-6 sm:p-8 border border-blue-200/90 shadow-md shadow-blue-500/5 mt-6">
+            <h3 class="text-lg font-black bg-gradient-to-r from-slate-900 to-brand-800 bg-clip-text text-transparent flex items-center gap-2 mb-3">
+              <i class="fa-solid fa-book-open text-brand-600"></i> Подробная биография и опыт
+            </h3>
+            <p class="text-slate-700 leading-relaxed text-sm sm:text-base whitespace-pre-line text-justify">
+              ${person.fullBio || person.shortDesc}
+            </p>
+          </div>
+        </div>
+      `;
+
+      navigateTo('detail');
+    }
+
+    // Управление модальным окном (редактирование полностью отключено для всех 5 героев)
+    function openEditModal(id, event) {
+      if (event) event.stopPropagation();
+      return;
+    }
+
+    function closeEditModal() {
+      document.getElementById('edit-modal').classList.add('hidden');
+    }
+
+    // Обработка загрузки файла изображения (Base64)
+    function handleFileUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const base64Url = e.target.result;
+        document.getElementById('edit-preview-avatar').src = base64Url;
+        document.getElementById('input-avatar-url').value = base64Url;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // Обработка сохранения изменений в объекте
+    function handleSaveEdit(event) {
+      event.preventDefault();
+      const id = parseInt(document.getElementById('edit-person-id').value);
+      if ([1, 2, 3, 4].includes(id)) return;
+      const person = profiles.find(p => p.id === id);
+
+      if (person) {
+        person.fullName = document.getElementById('input-fullname').value.trim();
+        person.role = document.getElementById('input-role').value.trim();
+        person.shortDesc = document.getElementById('input-short-desc').value.trim();
+        person.fullBio = document.getElementById('input-full-bio').value.trim();
+        
+        const newAvatar = document.getElementById('input-avatar-url').value.trim();
+        if (newAvatar) {
+          person.avatar = newAvatar;
+        }
+
+        saveData();
+        renderHeroesCircles();
+
+        if (activeHeroIndex !== null && profiles[activeHeroIndex].id === id) {
+          showHeroInfo(activeHeroIndex);
+        }
+
+        if (currentView === 'detail' && selectedPersonId === id) {
+          showPersonDetail(id);
+        }
+
+        closeEditModal();
+      }
+    }
+
+    let activeHeroIndex = null;
+    let isPinned = false;
+
+    // Генерация и интерактив 5 кружков
+    function renderHeroesCircles() {
+      const container = document.getElementById('heroes-circles-wrap');
+      if (!container) return;
+      container.innerHTML = '';
+
+      profiles.forEach((person, index) => {
+        const circleWrap = document.createElement('div');
+        circleWrap.className = "hero-circle relative flex flex-col items-center cursor-pointer select-none";
+        circleWrap.id = `hero-circle-${index}`;
+
+        circleWrap.innerHTML = `
+          <!-- Круглая рамка с фото -->
+          <div class="circle-avatar-box w-20 h-20 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full p-1 bg-gradient-to-tr from-cyan-400 via-brand-500 to-indigo-600 shadow-xl shadow-brand-500/20 hover:shadow-2xl transition-all duration-300">
+            <div class="w-full h-full rounded-full overflow-hidden border-2 border-white bg-slate-100">
+              <img src="${person.avatar}" 
+                   alt="${person.fullName}" 
+                   onerror="this.src='https://placehold.co/300x300/1e40af/ffffff?text=Герой';"
+                   class="w-full h-full object-cover">
+            </div>
+          </div>
+          <!-- Имя под кружком (краткое) -->
+          <div class="circle-name mt-2 text-center text-[11px] sm:text-xs font-bold text-slate-800 max-w-[90px] sm:max-w-[120px] truncate transition-opacity duration-300">
+            ${person.fullName.split(' ')[0]} ${person.fullName.split(' ')[1] ? person.fullName.split(' ')[1][0] + '.' : ''}
+          </div>
+        `;
+
+        // События наведения и клика
+        circleWrap.addEventListener('mouseenter', () => handleHeroHover(index));
+        circleWrap.addEventListener('click', (e) => handleHeroClick(index, e));
+
+        container.appendChild(circleWrap);
+      });
+
+      // Сброс при выходе курсора с контейнера (если не зафиксировано)
+      container.addEventListener('mouseleave', () => {
+        if (!isPinned) {
+          resetHeroCircles();
+        }
+      });
+    }
+
+    // Анимация разъезжания кружков и выпадания карточки
+    function handleHeroHover(hoveredIndex) {
+      activeHeroIndex = hoveredIndex;
+      applyCirclesOffset(hoveredIndex);
+      showHeroInfo(hoveredIndex);
+    }
+
+    function handleHeroClick(clickedIndex, e) {
+      if (e) e.stopPropagation();
+      isPinned = true;
+      activeHeroIndex = clickedIndex;
+      applyCirclesOffset(clickedIndex);
+      showHeroInfo(clickedIndex);
+    }
+
+    function applyCirclesOffset(activeIndex) {
+      profiles.forEach((_, i) => {
+        const el = document.getElementById(`hero-circle-${i}`);
+        if (!el) return;
+
+        const avatarBox = el.querySelector('.circle-avatar-box');
+        const nameEl = el.querySelector('.circle-name');
+
+        if (i === activeIndex) {
+          // Активный центральный кружок увеличивается и светится
+          el.style.transform = 'scale(1.22) translateY(-10px)';
+          el.style.zIndex = '30';
+          if (avatarBox) {
+            avatarBox.className = "circle-avatar-box w-20 h-20 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full p-1 bg-gradient-to-tr from-cyan-400 via-brand-500 to-indigo-600 shadow-2xl shadow-brand-500/40 ring-4 ring-cyan-300/60 transition-all duration-300";
+          }
+          if (nameEl) {
+            nameEl.classList.add('text-brand-700', 'font-black');
+            nameEl.style.opacity = '1';
+          }
+        } else {
+          // Остальные кружки разъезжаются влево или вправо
+          const distance = Math.abs(i - activeIndex);
+          const shiftDir = i < activeIndex ? -1 : 1;
+          const shiftPx = shiftDir * (30 + distance * 15);
+
+          el.style.transform = `translateX(${shiftPx}px) scale(0.88)`;
+          el.style.zIndex = '10';
+          if (avatarBox) {
+            avatarBox.className = "circle-avatar-box w-20 h-20 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full p-1 bg-slate-200 opacity-60 filter grayscale-[25%] transition-all duration-300";
+          }
+          if (nameEl) {
+            nameEl.style.opacity = '0.4';
+          }
+        }
+      });
+    }
+
+    function resetHeroCircles() {
+      activeHeroIndex = null;
+      profiles.forEach((_, i) => {
+        const el = document.getElementById(`hero-circle-${i}`);
+        if (!el) return;
+        el.style.transform = 'translateX(0px) scale(1) translateY(0px)';
+        el.style.zIndex = '10';
+        const avatarBox = el.querySelector('.circle-avatar-box');
+        const nameEl = el.querySelector('.circle-name');
+        if (avatarBox) {
+          avatarBox.className = "circle-avatar-box w-20 h-20 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full p-1 bg-gradient-to-tr from-cyan-400 via-brand-500 to-indigo-600 shadow-xl transition-all duration-300";
+        }
+        if (nameEl) {
+          nameEl.classList.remove('text-brand-700', 'font-black');
+          nameEl.style.opacity = '1';
+        }
+      });
+
+      // Прячем выпадающую карточку
+      const dropCard = document.getElementById('hero-drop-card');
+      if (dropCard) {
+        dropCard.classList.add('opacity-0', 'translate-y-6', 'pointer-events-none');
+      }
+    }
+
+    // Наполнение и выпадание карточки
+    function showHeroInfo(index) {
+      const hero = profiles[index];
+      if (!hero) return;
+
+      const dropCard = document.getElementById('hero-drop-card');
+      const avatarEl = document.getElementById('drop-avatar');
+      const roleEl = document.getElementById('drop-role');
+      const nameEl = document.getElementById('drop-name');
+      const descEl = document.getElementById('drop-desc');
+      const viewBtn = document.getElementById('drop-view-btn');
+      const editBtn = document.getElementById('drop-edit-btn');
+
+      if (!dropCard) return;
+
+      avatarEl.src = hero.avatar;
+      avatarEl.onerror = () => { avatarEl.src = 'https://placehold.co/300x300/1e40af/ffffff?text=Герой'; };
+      roleEl.textContent = hero.role;
+      nameEl.textContent = hero.fullName;
+      descEl.textContent = hero.shortDesc;
+
+      viewBtn.onclick = () => showPersonDetail(hero.id);
+      if (editBtn) editBtn.classList.add('hidden');
+
+      // Анимация выпадания
+      dropCard.classList.remove('opacity-0', 'translate-y-6', 'pointer-events-none');
+      dropCard.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
+    }
+
+    // Сброс фиксации по клику в пустую область
+    window.addEventListener('click', (e) => {
+      const heroesWrap = document.getElementById('heroes-circles-wrap');
+      const dropCard = document.getElementById('hero-drop-card');
+      if (heroesWrap && !heroesWrap.contains(e.target) && dropCard && !dropCard.contains(e.target)) {
+        isPinned = false;
+        resetHeroCircles();
+      }
+    });
+
+    // Инициализация при загрузке окна
+    window.onload = function() {
+      loadData();
+      renderHeroesCircles();
+      renderInstagramFeed();
+    };
+
+    // Закрытие модального окна по клику вне его области
+    window.addEventListener('click', function(e) {
+      const modal = document.getElementById('edit-modal');
+      if (e.target === modal) {
+        closeEditModal();
+      }
+    });
+
+    // Обработка клавиши Escape для закрытия окон
+    window.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeEditModal();
+      }
+    });
+  </script>
+</body>
+</html>
